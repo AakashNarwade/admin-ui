@@ -1,10 +1,10 @@
 import "./App.css";
-import UserManagement from "./components/UserManagement";
+import UserAdmin from "./components/UserAdmin";
 
 function App() {
   return (
-    <div className="">
-      <UserManagement />
+    <div className="w-full">
+      <UserAdmin />
     </div>
   );
 }
