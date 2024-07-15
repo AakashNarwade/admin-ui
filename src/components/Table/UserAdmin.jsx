@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import Header from "./Header.jsx";
-import SearchSection from "./SearchSection.jsx";
+import Header from "../Header/Header.jsx";
+import SearchSection from "../Search/SearchSection.jsx";
 import UserTable from "./UserTable.jsx";
-import Pagination from "./Pagination.jsx";
+import Pagination from "../Pagination/Pagination.jsx";
 import {
   handleSelectAll,
   handleSelect,
@@ -11,33 +11,25 @@ import {
   updateUser,
   deleteUser,
   searchUsers,
-} from "../utils/helper";
+} from "../../utils/helper.js";
+import useFetch from "../../hooks/useFetch.js";
 
 const UserAdmin = () => {
-  const [users, setUsers] = useState([]);
   const [selectedAll, setSelectedAll] = useState(false);
   const [editValue, setEditValue] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
-  const [usersListTemp, setUsersListTemp] = useState([]);
   const [page, setPage] = useState(0);
-  const API_URL =
-    "https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json";
-
-  const getData = async () => {
-    const res = await fetch(API_URL);
-    const data = await res.json();
-    setUsers(data.slice(page, page + 10));
-    setUsersListTemp(data);
-  };
+  const { users, usersListTemp, getData, setUsers } = useFetch();
+  console.log(users);
 
   useEffect(() => {
-    getData();
+    getData(page);
   }, [searchQuery, page]);
 
-  const onSearch = (e) => {
-    e.preventDefault();
-    searchUsers(usersListTemp, searchQuery, setUsers);
-  };
+  // const onSearch = (e) => {
+  //   e.preventDefault();
+  //   searchUsers(usersListTemp, searchQuery, setUsers);
+  // };
 
   const pageCount = Math.ceil(usersListTemp.length / 10);
 
@@ -45,7 +37,13 @@ const UserAdmin = () => {
     <>
       <Header />
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-        <SearchSection handleSearchQuery={setSearchQuery} onSearch={onSearch} />
+        <SearchSection
+          handleSearchQuery={setSearchQuery}
+          searchUsers={(e) =>
+            searchUsers(usersListTemp, searchQuery, setUsers, e)
+          }
+          // onSearch={onSearch}
+        />
         <UserTable
           users={users}
           editValue={editValue}

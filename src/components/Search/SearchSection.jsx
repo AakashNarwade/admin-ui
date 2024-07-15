@@ -1,7 +1,7 @@
-const SearchSection = ({ handleSearchQuery, onSearch }) => {
+const SearchSection = ({ handleSearchQuery, searchUsers }) => {
   return (
     <form
-      onSubmit={onSearch}
+      onSubmit={searchUsers}
       className="flex flex-col sm:flex-row gap-4 mb-4 py-6"
     >
       <input

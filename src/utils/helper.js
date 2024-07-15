@@ -32,7 +32,8 @@ export const deleteUser = (users, setUsers, id) => {
   setUsers(filteredUsers);
 };
 
-export const searchUsers = (usersListTemp, searchQuery, setUsers) => {
+export const searchUsers = (usersListTemp, searchQuery, setUsers, e) => {
+  e.preventDefault();
   const searchedValue = usersListTemp.filter(
     (user) =>
       user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||

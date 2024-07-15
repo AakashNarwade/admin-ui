@@ -1,5 +1,5 @@
 import "./App.css";
-import UserAdmin from "./components/UserAdmin";
+import UserAdmin from "../src/components/Table/UserAdmin";
 
 function App() {
   return (
