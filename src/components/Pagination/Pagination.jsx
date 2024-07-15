@@ -30,7 +30,7 @@
 //           key={p}
 //           className={`px-3 py-2 rounded-lg ${
 //             p * 10 === page
-//               ? "bg-black text-white"
+              // ? "bg-black text-white"
 //               : "bg-white text-black border border-gray-300"
 //           } font-normal text-md`}
 //           onClick={() => setPage(p * 10)}
